@@ -81,8 +81,10 @@ sub detect_license {
 
     my $content = `cat $file`;
 
-    $license = 'MOZILLA PUBLIC LICENSE ('.$1.')' if ($content =~ /MOZILLA PUBLIC LICENSE\s+Version ([0-9\.]+)/);
-    $license = 'MIT license' if ($content =~ /MIT license/);
+    $license = 'MOZILLA PUBLIC LICENSE ('.$1.')' if ($content =~ /MOZILLA PUBLIC LICENSE\s+Version ([0-9\.]+)/i);
+    $license = 'MIT license' if ($content =~ /MIT license/i);
+    $license = 'Apache License ('.$1.')' if ($content =~ /Apache License\s+Version ([0-9\.]+)/i);
+    $license = 'Apache License ('.$1.')' if ($content =~ /Apache License, Version ([0-9\.]+)/i);
 
     return $license;
 }
